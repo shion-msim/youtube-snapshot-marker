@@ -1,6 +1,7 @@
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
+const TARGET_TRIPLE: &str = "x86_64-pc-windows-msvc";
 const YTDLP_NAMES: &[&str] = &["yt-dlp", "yt-dlp.exe"];
 const FFMPEG_NAMES: &[&str] = &["ffmpeg", "ffmpeg.exe"];
 
@@ -13,7 +14,7 @@ pub fn resolve_ffmpeg() -> Result<PathBuf, String> {
 }
 
 fn resolve_executable(sidecar_base: &str, path_names: &[&str]) -> Result<PathBuf, String> {
-    if let Ok(path) = sidecar_path(sidecar_base) {
+    for path in bundled_candidates(sidecar_base) {
         if path.exists() {
             return Ok(path);
         }
@@ -30,19 +31,29 @@ fn resolve_executable(sidecar_base: &str, path_names: &[&str]) -> Result<PathBuf
     ))
 }
 
-fn sidecar_path(base: &str) -> Result<PathBuf, String> {
-    let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    let triple = "x86_64-pc-windows-msvc";
-    let candidates = [
-        manifest_dir.join("binaries").join(format!("{base}-{triple}.exe")),
-        manifest_dir.join("binaries").join(format!("{base}.exe")),
+fn bundled_candidates(base: &str) -> Vec<PathBuf> {
+    let file_names = [
+        format!("{base}-{TARGET_TRIPLE}.exe"),
+        format!("{base}.exe"),
     ];
-    for path in candidates {
-        if path.exists() {
-            return Ok(path);
+
+    let mut search_dirs: Vec<PathBuf> = Vec::new();
+    if let Ok(exe) = std::env::current_exe() {
+        if let Some(parent) = exe.parent() {
+            search_dirs.push(parent.to_path_buf());
         }
     }
-    Err("sidecar not in binaries".into())
+
+    let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    search_dirs.push(manifest_dir.join("binaries"));
+
+    let mut paths = Vec::new();
+    for dir in search_dirs {
+        for name in &file_names {
+            paths.push(dir.join(name));
+        }
+    }
+    paths
 }
 
 fn find_on_path(name: &str) -> Option<PathBuf> {

@@ -1,0 +1,4 @@
+Bundled Windows x64 tools (see scripts/download-binaries.ps1 to refresh).
+
+yt-dlp: https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe
+ffmpeg: https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip (bin/ffmpeg.exe)
