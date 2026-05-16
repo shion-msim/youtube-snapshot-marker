@@ -1,0 +1,291 @@
+:root {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e8eaed;
+  background: #121418;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 2rem;
+}
+
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: #9aa0a6;
+}
+
+.url-form label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.url-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.url-row input {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #3c4043;
+  border-radius: 8px;
+  background: #1e2128;
+  color: inherit;
+}
+
+button {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #5f6368;
+  border-radius: 8px;
+  background: #2a2f38;
+  color: inherit;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #353b47;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: #1a73e8;
+  border-color: #1a73e8;
+}
+
+button.primary:hover:not(:disabled) {
+  background: #1765cc;
+}
+
+button.danger-btn {
+  border-color: #8b3a3a;
+  color: #f28b82;
+}
+
+button.link-btn {
+  border: none;
+  background: none;
+  color: #8ab4f8;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.error {
+  color: #f28b82;
+  margin: 0.5rem 0 0;
+}
+
+.muted {
+  color: #9aa0a6;
+}
+
+.progress {
+  color: #81c995;
+  margin: 0.5rem 0 0;
+}
+
+.video-title {
+  margin: 0.75rem 0;
+  font-weight: 600;
+}
+
+.player-section {
+  margin-bottom: 1rem;
+}
+
+.player-wrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.player-placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #9aa0a6;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.player-container {
+  width: 100%;
+  height: 100%;
+}
+
+.player-meta {
+  margin: 0.4rem 0 0;
+  color: #9aa0a6;
+  font-size: 0.85rem;
+}
+
+.seek-section {
+  margin: 1rem 0;
+}
+
+.seek-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #9aa0a6;
+  margin-bottom: 0.35rem;
+}
+
+.seek-bar {
+  position: relative;
+  height: 28px;
+  cursor: pointer;
+}
+
+.seek-bar.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.seek-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 6px;
+  transform: translateY(-50%);
+  background: #3c4043;
+  border-radius: 3px;
+}
+
+.seek-progress {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 6px;
+  transform: translateY(-50%);
+  background: #8ab4f8;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.seek-marker {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 18px;
+  margin-left: -5px;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.seek-marker.manual {
+  background: #fbbc04;
+}
+
+.seek-marker.auto {
+  background: #81c995;
+}
+
+.seek-range {
+  width: 100%;
+  margin-top: 0.35rem;
+  accent-color: #8ab4f8;
+}
+
+.marker-actions {
+  margin-bottom: 0.75rem;
+}
+
+.marker-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #3c4043;
+  border-radius: 8px;
+}
+
+.marker-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  border-bottom: 1px solid #2a2f38;
+}
+
+.marker-item:last-child {
+  border-bottom: none;
+}
+
+.marker-index {
+  width: 1.5rem;
+  color: #9aa0a6;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+.badge.manual {
+  background: #3d3318;
+  color: #fbbc04;
+}
+
+.badge.auto {
+  background: #1e3a2f;
+  color: #81c995;
+}
+
+.marker-time-input {
+  width: 6rem;
+  padding: 0.2rem 0.35rem;
+  border: 1px solid #3c4043;
+  border-radius: 4px;
+  background: #1e2128;
+  color: inherit;
+}
+
+.export-panel h2 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.export-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.export-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
